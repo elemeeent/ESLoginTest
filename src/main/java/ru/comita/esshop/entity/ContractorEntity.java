@@ -1,9 +1,9 @@
-package ru.comita.sedsf.entity;
+package ru.comita.esshop.entity;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Contractor {
+public class ContractorEntity {
 
     @SerializedName("contractorName")
     @Expose
@@ -41,14 +41,10 @@ public class Contractor {
 
     @Override
     public String toString() {
-        return "Contractor{" +
+        return "ContractorEntity{" +
                 "contractorName='" + contractorName + '\'' +
                 ", contractorLogin='" + contractorLogin + '\'' +
                 ", contractorPassword='" + contractorPassword + '\'' +
                 '}';
-    }
-
-    public Contractor() {
-
     }
 }

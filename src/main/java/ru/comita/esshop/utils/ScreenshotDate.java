@@ -1,11 +1,8 @@
-package ru.comita.sedsf.utils;
+package ru.comita.esshop.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Created by viacheslavs on 16.03.2017.
- */
 public class ScreenshotDate {
     public static String currentTime() {
         LocalDateTime now = LocalDateTime.now();

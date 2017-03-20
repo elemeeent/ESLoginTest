@@ -1,7 +1,7 @@
-package ru.comita.sedsf.utils;
+package ru.comita.esshop.utils;
 
 import com.google.gson.Gson;
-import ru.comita.sedsf.entity.Contractor;
+import ru.comita.esshop.entity.ContractorEntity;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,21 +13,18 @@ public class DataJsonParser {
      * @param tClass       - set object of Entity class;
      * @param <T>          - set Entity class;
      * @return - processed object of Entity class;
-     * @throws FileNotFoundException
+     * @throws - FileNotFoundException
      */
+
 
     public static <T extends Object> T parseJsonToEntity(String jsonFileName, T tClass) throws FileNotFoundException {
         Gson gson = new Gson();
-        tClass = gson.fromJson(new FileReader(jsonFileName), (Class<T>) tClass.getClass());
+        String jsonFileAndPath = DataJsonParser.class.getClassLoader().getResource(jsonFileName).getPath();
+        tClass = gson.fromJson(new FileReader(jsonFileAndPath), (Class<T>) tClass.getClass());
         return tClass;
     }
 
-
-    public static void main(String[] args) throws FileNotFoundException {
-        Contractor contractor = new Contractor();
-        contractor = DataJsonParser.parseJsonToEntity("src\\main\\resources\\data.json", contractor);
-        System.out.println(contractor.getContractorPassword());
-
-    }
 }
+
+
 

@@ -1,4 +1,4 @@
-package ru.comita.sedsf.tests.page;
+package ru.comita.esshop.tests.page;
 
 import org.openqa.selenium.By;
 
@@ -14,10 +14,17 @@ public class ContractorPage {
     }
 
     public ContractorPage logout(){
-        $(By.id("exitBtn")).click();
-        $(By.xpath(""));
-        $(By.cssSelector(".x-window.x-window-plain.x-window-dlg .x-btn-text")).shouldHave(text("ОК"));
+        openContractorMenu();
+        $(By.xpath(".//*[@id=\"navbar\"]/ul[2]/li/ul/li[8]/a"))
+                .shouldBe(visible)
+                .shouldHave(text("Выход"))
+                .click();
+        return this;
+    }
 
+    public ContractorPage openContractorMenu(){
+        $(By.xpath(".//*[@id=\"navbar\"]/ul[2]/li/a")).shouldBe(visible)
+                .click();
         return this;
     }
 }
