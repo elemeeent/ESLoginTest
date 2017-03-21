@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
+    <!--Setting up repositories-->
     <repositories>
         <repository>
             <id>central</id>
@@ -22,6 +23,13 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <!--Properties for Allure-->
+    <properties>
+        <aspectj.version>1.7.4</aspectj.version>
+        <allure.version>1.5.2</allure.version>
+    </properties>
+
+    <!--All dependecies-->
     <dependencies>
         <dependency>
             <groupId>com.codeborne</groupId>
@@ -55,17 +63,44 @@
             <artifactId>maven-resources-plugin</artifactId>
             <version>3.0.2</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/ru.yandex.qatools.allure/allure-testng-adaptor -->
+
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-site-plugin -->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-site-plugin</artifactId>
+            <version>3.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/ru.yandex.qatools.allure/allure-report-data -->
         <dependency>
             <groupId>ru.yandex.qatools.allure</groupId>
-            <artifactId>allure-testng-adaptor</artifactId>
+            <artifactId>allure-report-data</artifactId>
             <version>1.5.0</version>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/ru.yandex.qatools.properties/properties-loader -->
         <dependency>
             <groupId>ru.yandex.qatools.properties</groupId>
             <artifactId>properties-loader</artifactId>
             <version>1.5</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.6</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/ru.yandex.qatools.allure/allure-maven-plugin -->
+        <dependency>
+            <groupId>ru.yandex.qatools.allure</groupId>
+            <artifactId>allure-maven-plugin</artifactId>
+            <version>2.5</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/ru.yandex.qatools.allure/allure-bundle -->
+        <dependency>
+            <groupId>ru.yandex.qatools.allure</groupId>
+            <artifactId>allure-bundle</artifactId>
+            <version>1.5.2</version>
         </dependency>
 
     </dependencies>
@@ -87,7 +122,28 @@
                     </archive>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.14</version>
+                <configuration>
+                    <testFailureIgnore>false</testFailureIgnore>
+                    <argLine>
+                        -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
+                    </argLine>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
+    <!--Report settings-->
+    <reporting>
+        <excludeDefaults>true</excludeDefaults>
+        <plugins>
+            <plugin>
+                <groupId>ru.yandex.qatools.allure</groupId>
+                <artifactId>allure-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>

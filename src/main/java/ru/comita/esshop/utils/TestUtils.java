@@ -1,12 +1,13 @@
 package ru.comita.esshop.utils;
 
 import com.google.gson.Gson;
-import ru.comita.esshop.entity.ContractorEntity;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-public class DataJsonParser {
+public class TestUtils {
 
     /**
      * @param jsonFileName - set path to *.json file and the file itself;
@@ -19,11 +20,17 @@ public class DataJsonParser {
 
     public static <T extends Object> T parseJsonToEntity(String jsonFileName, T tClass) throws FileNotFoundException {
         Gson gson = new Gson();
-        String jsonFileAndPath = DataJsonParser.class.getClassLoader().getResource(jsonFileName).getPath();
+        String jsonFileAndPath = TestUtils.class.getClassLoader().getResource(jsonFileName).getPath();
         tClass = gson.fromJson(new FileReader(jsonFileAndPath), (Class<T>) tClass.getClass());
         return tClass;
     }
 
+
+    public static String currentTime() {
+        LocalDateTime now = LocalDateTime.now();
+        String formatedTime = now.format(DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss"));
+        return formatedTime;
+    }
 }
 
 

@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 import ru.comita.esshop.entity.ContractorEntity;
 import ru.comita.esshop.tests.page.LoginPage;
 import ru.comita.esshop.utils.SettingsClass;
-import ru.comita.esshop.utils.DataJsonParser;
+import ru.comita.esshop.utils.TestUtils;
 
 import java.io.FileNotFoundException;
 
@@ -17,7 +17,8 @@ public class TestLogin {
 
     @BeforeTest
     public void setUp() throws FileNotFoundException {
-
+        System.setProperty("selenide.browser", "chrome");
+        System.setProperty("webdriver.chrome.driver", SettingsClass.class.getClassLoader().getResource("chromedriver.exe").getPath());
         sc = SettingsClass.getConfig();
         lp = open(LoginPage.PAGE_URL, LoginPage.class);
     }
@@ -25,7 +26,7 @@ public class TestLogin {
     @Test
     public void testSome() throws Exception {
         contractorEntity = new ContractorEntity();
-        contractorEntity = DataJsonParser.parseJsonToEntity("data.json", contractorEntity);
+        contractorEntity = TestUtils.parseJsonToEntity("data.json", contractorEntity);
         lp.fillAllPage(contractorEntity.getContractorLogin(), contractorEntity.getContractorPassword())
                 .checkCompanySuccessLogin()
                 .logout();

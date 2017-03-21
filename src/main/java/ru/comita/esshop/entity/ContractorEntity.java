@@ -20,6 +20,7 @@ public class ContractorEntity {
     }
 
     public void setContractorName(String contractorName) {
+
         this.contractorName = contractorName;
     }
 
