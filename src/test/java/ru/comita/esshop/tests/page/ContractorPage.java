@@ -6,13 +6,13 @@ import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Screenshots.takeScreenShot;
 import static com.codeborne.selenide.Selenide.$;
 
 public class ContractorPage {
     public ContractorPage checkCompanySuccessLogin() {
         $(By.xpath(".//*[@id=\"navbar\"]/ul[1]/li[1]/a")).shouldBe(visible)
                 .shouldHave(text("Закупки"));
+        TestUtils.takeScreenshot();
         return this;
     }
 
@@ -30,7 +30,7 @@ public class ContractorPage {
     public ContractorPage openContractorMenu() {
         $(By.xpath(".//*[@id=\"navbar\"]/ul[2]/li/a")).shouldBe(visible)
                 .click();
-        takeScreenShot("ES_LoginTest_openContractorMenu_" + TestUtils.currentTime() + ".png");
         return this;
     }
+
 }
